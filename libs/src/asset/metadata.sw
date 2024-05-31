@@ -1,5 +1,7 @@
 library;
 
+use ::asset::events::MetadataSet;
+use ::asset::errors::BurnError;
 use standards::src7::Metadata;
 use std::{
     bytes::Bytes,
@@ -167,6 +169,11 @@ pub fn _set_metadata(
     metadata: Metadata,
 ) {
     metadata_key.insert(asset, key, metadata);
+    log(MetadataSet {
+        asset,
+        key,
+        metadata,
+    });
 }
 
 abi SetAssetMetadata {
